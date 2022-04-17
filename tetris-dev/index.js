@@ -1,56 +1,56 @@
 export const game = {
   area: [
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['y', 'y', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
-    ['y', 'y', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'x', 'x', 'o', 'o', 'o', 'o'],
+    ['o', 'o', 'o', 'o', 'x', 'x', 'o', 'o', 'o', 'o']
   ],
 
   activeTetromino: {
     x: 0,
     y: 0,
     block: [
-      ['y', 'y', 'x'],
-      ['x', 'y', 'y'],
-      ['x', 'x', 'x'],
+      ['x', 'x', 'o'],
+      ['o', 'x', 'x'],
+      ['o', 'o', 'o'],
     ],
     rotationIndex: 0,
     rotations: [
       [
-        ['y', 'y', 'x'],
-        ['x', 'y', 'y'],
-        ['x', 'x', 'x'],
+        ['x', 'x', 'o'],
+        ['o', 'x', 'x'],
+        ['o', 'o', 'o'],
       ],
       [
-        ['x', 'x', 'y'],
-        ['x', 'y', 'y'],
-        ['x', 'y', 'x'],
+        ['o', 'o', 'x'],
+        ['o', 'x', 'x'],
+        ['o', 'x', 'o'],
       ],
       [
-        ['x', 'x', 'x'],
-        ['y', 'y', 'x'],
-        ['x', 'y', 'y'],
+        ['o', 'o', 'o'],
+        ['x', 'x', 'o'],
+        ['o', 'x', 'x'],
       ],
       [
-        ['x', 'y', 'x'],
-        ['y', 'y', 'x'],
-        ['y', 'x', 'x'],
+        ['o', 'x', 'o'],
+        ['x', 'x', 'o'],
+        ['x', 'o', 'o'],
       ],
     ]
   },
@@ -83,10 +83,10 @@ export const game = {
     const tetromino = this.activeTetromino.block;
     for (let i = 0; i < tetromino.length; i++) {
       for (let j = 0; j < tetromino[i].length; j++) {
-        if (tetromino[i][j] === 'x') continue;
+        if (tetromino[i][j] === 'o') continue;
         if (!this.area[y + i] ||
           !this.area[y + i][x + j] ||
-          this.area[y + i][x + j] === 'y') {
+          this.area[y + i][x + j] === 'x') {
           return false
         }
       }
@@ -96,14 +96,11 @@ export const game = {
   },
 
   stopMove() {
-    const {
-      x,
-      y
-    } = this.activeTetromino;
+    const {x,y} = this.activeTetromino;
     const tetromino = this.activeTetromino.block;
     for (let i = 0; i < tetromino.length; i++) {
       for (let j = 0; j < tetromino[i].length; j++) {
-        if (tetromino[i][j] !== 'x') {
+        if (tetromino[i][j] !== 'o') {
           this.area[y + i][x + j] = this.activeTetromino.block[i][j]
         }
       }
@@ -129,7 +126,7 @@ export const game = {
     const tetromino = this.activeTetromino.block;
     for (let i = 0; i < tetromino.length; i++) {
       for (let j = 0; j < tetromino[i].length; j++) {
-        if (tetromino[i][j] !== 'x') {
+        if (tetromino[i][j] !== 'o') {
           area[y + i][x + j] = this.activeTetromino.block[i][j]
         }
       }
@@ -159,7 +156,7 @@ const showArea = (area) => {
     for (let x = 0; x < line.length; x++) {
       const block = line[x];
   
-      if (block === 'y') {
+      if (block === 'x') {
         context.fillStyle = 'tomato';
 
         context.fillRect(x * widthBlock, y * hightBlock, widthBlock, hightBlock);
@@ -168,9 +165,7 @@ const showArea = (area) => {
   }
 }
 
-
 showArea(game.area)
-
 
 
 window.addEventListener('keydown', (e) => {

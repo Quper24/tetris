@@ -117,6 +117,17 @@ const game = {
 
     return true
   },
+  stopMove() {
+    const {x,y} = this.activeTetromino;
+    const tetromino = this.activeTetromino.block;
+    for (let i = 0; i < tetromino.length; i++) {
+      for (let j = 0; j < tetromino[i].length; j++) {
+        if (tetromino[i][j] !== 'o') {
+          this.area[y + i][x + j] = this.activeTetromino.block[i][j]
+        }
+      }
+    }
+  },
 };
 
 
