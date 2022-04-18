@@ -59,6 +59,12 @@ export const game = {
     level: 0,
   },
 
+  // nextTetromino: this.getTetromino(),
+
+  // getTetromino() {
+
+  // },
+
   moveLeft() {
     if (this.checkOutPosition(this.activeTetromino.x - 1, this.activeTetromino.y)) {
       this.activeTetromino.x--
