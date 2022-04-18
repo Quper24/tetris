@@ -2,8 +2,8 @@ const SIZE_BLOCK = 25;
 
 // механика
 
-const game = {
-  area: [
+class Game {
+  area = [
     ['o','o','o','o','o','o','o','o','o','o',],
     ['o','o','o','o','o','o','o','o','o','o',],
     ['o','o','o','o','o','o','o','o','o','o',],
@@ -24,9 +24,9 @@ const game = {
     ['o','o','o','o','o','o','o','o','o','x',],
     ['o','o','o','o','o','x','o','o','o','x',],
     ['o','o','o','o','x','x','x','o','o','x',],
-  ],
+  ];
   
-  activeTetromino: {
+  activeTetromino = {
     x: 3,
     y: 0,
     block: [
@@ -57,19 +57,21 @@ const game = {
         ['o', 'o', 'x'],
       ],
     ]
-  },
+  };
+
+
 
   moveLeft() {
     if (this.checkOutPosition(this.activeTetromino.x - 1, this.activeTetromino.y)) {
       this.activeTetromino.x -= 1;
     }
-  },
+  };
 
   moveRight() {
     if (this.checkOutPosition(this.activeTetromino.x + 1, this.activeTetromino.y)) {
       this.activeTetromino.x += 1;
     }
-  },
+  };
 
   moveDown() {
     if (this.checkOutPosition(this.activeTetromino.x, this.activeTetromino.y + 1)) {
@@ -77,7 +79,7 @@ const game = {
     } else {
       this.stopMove();
     }
-  },
+  };
 
   rotateTetromino() {
     this.activeTetromino.rotationIndex =
@@ -95,7 +97,7 @@ const game = {
       this.activeTetromino.block =
         this.activeTetromino.rotation[this.activeTetromino.rotationIndex];
     }
-  },
+  };
 
   get viewArea() {
     const area = JSON.parse(JSON.stringify(this.area));
@@ -111,7 +113,7 @@ const game = {
     }
 
     return area;
-  },
+  };
 
   checkOutPosition(x, y) {
     const tetromino = this.activeTetromino.block;
@@ -128,7 +130,7 @@ const game = {
       }
     }
     return true
-  },
+  };
 
   stopMove() {
     const {x, y, block: tetromino} = this.activeTetromino;
@@ -143,6 +145,8 @@ const game = {
     }
   }
 }
+
+const game = new Game();
 
 
 
