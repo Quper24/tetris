@@ -1,4 +1,7 @@
 import { Game } from "./module/game.js";
+
+export const COLUMNS = 10;
+export const ROWS = 20;
 const SIZE_BLOCK = 25;
 
 // механика
@@ -12,11 +15,22 @@ const game = new Game();
 // отрисовка
 const container = document.querySelector('.container');
 
+const colors = {
+  J: 'FireBrick',
+  I: 'CadetBlue',
+  O: 'Gold',
+  L: 'SlateBlue',
+  2: 'RoyalBlue',
+  T: 'Indigo',
+  S: 'MediumSeaGreen',
+};
+
 const canvas = document.createElement('canvas');
 canvas.classList.add('game-area');
 container.append(canvas);
-canvas.width = SIZE_BLOCK * 10;
-canvas.height = SIZE_BLOCK * 20;
+canvas.width = SIZE_BLOCK * COLUMNS;
+canvas.height = SIZE_BLOCK * ROWS;
+
 
 const context = canvas.getContext('2d');
 
@@ -28,8 +42,8 @@ const showArea = area => {
 
     for (let x = 0; x < line.length; x++) {
       const block = line[x];
-      if (block === 'x') {
-        context.fillStyle = 'darkmagenta';
+      if (block !== 'o') {
+        context.fillStyle = colors[block];
         context.strokeStyle = 'white';
         context.fillRect(x * SIZE_BLOCK, y * SIZE_BLOCK, SIZE_BLOCK, SIZE_BLOCK);
         context.strokeRect(x * SIZE_BLOCK, y * SIZE_BLOCK, SIZE_BLOCK, SIZE_BLOCK);

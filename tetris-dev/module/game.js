@@ -1,3 +1,4 @@
+import { ROWS, COLUMNS } from "../index.js";
 import { tetrominoes } from "./tetrominoes.js";
 
 export class Game {
@@ -18,10 +19,10 @@ export class Game {
     ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
     ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
     ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
-    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'x', ],
-    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'x', ],
-    ['o', 'o', 'o', 'o', 'o', 'x', 'o', 'o', 'o', 'x', ],
-    ['o', 'o', 'o', 'o', 'x', 'x', 'x', 'o', 'o', 'x', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
   ];
 
   activeTetromino = this.createTetromino();
@@ -93,7 +94,7 @@ export class Game {
     for (let i = 0; i < tetromino.length; i++) {
       const row = tetromino[i];
       for (let j = 0; j < row.length; j++) {
-        if (row[j] === 'x') {
+        if (row[j] !== 'o') {
           area[y + i][x + j] = tetromino[i][j];
         }
       }
@@ -110,7 +111,7 @@ export class Game {
 
         if (!this.area[y + i] ||
           !this.area[y + i][x + j] ||
-          this.area[y + i][x + j] === 'x') {
+          this.area[y + i][x + j] !== 'o') {
           return false;
         }
 
@@ -125,17 +126,42 @@ export class Game {
     for (let i = 0; i < tetromino.length; i++) {
       const row = tetromino[i];
       for (let j = 0; j < row.length; j++) {
-        if (row[j] === 'x') {
+        if (row[j] !== 'o') {
           this.area[y + i][x + j] = tetromino[i][j];
         }
       }
     }
 
     this.changeTetromino();
+    this.clearRow();
   }
 
   changeTetromino() {
     this.activeTetromino = this.nextTetromino;
     this.nextTetromino = this.createTetromino();
+  }
+
+  clearRow() {
+    const rows = [];
+    for (let i = ROWS - 1; i >= 0; i--) {
+      let countBlocks = 0;
+      for (let j = 0; j < COLUMNS; j++) {
+        if (this.area[i][j] !== 'o') {
+          countBlocks += 1;
+        }
+      }
+
+      if (!countBlocks) break;
+
+      if (countBlocks === COLUMNS) {
+        rows.unshift(i);
+      }
+    }
+
+    rows.forEach(i => {
+      this.area.splice(i, 1);
+      this.area.unshift(Array(COLUMNS).fill('o'));
+    })
+    
   }
 }
