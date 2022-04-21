@@ -1,17 +1,18 @@
-import { Game } from "./module/game.js";
-import { View } from "./module/view.js";
-import { Controller } from "./module/controller.js";
+import { Game } from "./modules/game.js";
+import { View } from "./modules/view.js";
+import { Controller } from "./modules/controller.js";
 
+export const SIZE_BLOCK = 25;
 export const COLUMNS = 10;
 export const ROWS = 20;
-export const SIZE_BLOCK = 25;
 
-// механика
 const game = new Game();
-
-// отрисовка
-const view = new View(document.querySelector('.container'))
-
-// контроль
+const view = new View(document.querySelector('.container'));
 const controller = new Controller(game, view);
 
+controller.init('Enter');
+
+
+fetch('https://jsonplaceholder.typicode.com/todos/1', {
+  method: 'DELETE',
+})

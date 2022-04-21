@@ -1,10 +1,12 @@
 export class Controller {
-  constructor(game, view) {
+  constructor (game, view) {
     this.game = game;
     this.view = view;
+  }
 
+  init(codeKey) {
     window.addEventListener('keydown', event => {
-      if (event.code === 'Enter') {
+      if (event.code === codeKey) {
         this.view.init();
         this.start();
       }
@@ -21,24 +23,24 @@ export class Controller {
 
     window.addEventListener('keydown', event => {
       const key = event.code;
-
+      
       switch (key) {
         case 'ArrowLeft':
           this.game.moveLeft();
           this.view.showArea(this.game.viewArea);
-          break;
+        break;
         case 'ArrowRight':
           this.game.moveRight();
-          this.view.showArea(game.viewArea);
-          break;
+          this.view.showArea(this.game.viewArea);
+        break;
         case 'ArrowDown':
           this.game.moveDown();
           this.view.showArea(this.game.viewArea);
-          break;
+        break;
         case 'ArrowUp':
           this.game.rotateTetromino();
           this.view.showArea(this.game.viewArea);
-          break;
+        break;
       }
     });
   }
