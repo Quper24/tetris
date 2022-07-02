@@ -14,10 +14,17 @@ body {
 .container {
   width: 500px;
   margin: 0 auto;
+  display: grid;
+  gap: 50px;
+  align-items: flex-start;
+  grid-template-areas: 
+  "a b"
+  "a c";
 }
 
 .game-area {
   border: solid black;
   border-width: 0 2px 3px 2px;
   display: block;
+  grid-area: a;
 }

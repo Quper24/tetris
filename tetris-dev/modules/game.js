@@ -1,30 +1,43 @@
-import {tetrominoes} from './tetrominoes.js'
-import { ROWS, COLUMNS } from '../index.js';
+import {
+  tetrominoes
+} from './tetrominoes.js'
+import {
+  ROWS,
+  COLUMNS
+} from '../index.js';
 
 export class Game {
+  score = 0;
+  points = [0, 100, 300, 700, 1500];
+  lines = 0;
+  lvl = 1;
+  record = localStorage.getItem('tetris-record') || 0
+
+  gameOver = false;
+
   area = [
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
-    ['o','o','o','o','o','o','o','o','o','o',],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
+    ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', ],
   ];
-  
+
   activeTetromino = this.createTetromino();
 
   nextTetromino = this.createTetromino();
@@ -35,7 +48,7 @@ export class Game {
     const rotation = tetrominoes[letterTetromino];
     const rotationIndex = Math.floor(Math.random() * rotation.length);
     const block = rotation[rotationIndex]
-    
+
     return {
       block,
       rotationIndex,
@@ -63,6 +76,7 @@ export class Game {
   }
 
   moveDown() {
+    if (this.gameOver) return;
     if (this.checkOutPosition(this.activeTetromino.x, this.activeTetromino.y + 1)) {
       this.activeTetromino.y += 1;
     } else {
@@ -73,15 +87,15 @@ export class Game {
   rotateTetromino() {
     this.activeTetromino.rotationIndex =
       this.activeTetromino.rotationIndex < 3 ?
-        this.activeTetromino.rotationIndex + 1 : 0;
+      this.activeTetromino.rotationIndex + 1 : 0;
 
     this.activeTetromino.block =
       this.activeTetromino.rotation[this.activeTetromino.rotationIndex];
-      
+
     if (!this.checkOutPosition(this.activeTetromino.x, this.activeTetromino.y)) {
       this.activeTetromino.rotationIndex =
         this.activeTetromino.rotationIndex > 0 ?
-          this.activeTetromino.rotationIndex - 1 : 3;
+        this.activeTetromino.rotationIndex - 1 : 3;
 
       this.activeTetromino.block =
         this.activeTetromino.rotation[this.activeTetromino.rotationIndex];
@@ -92,7 +106,7 @@ export class Game {
     const area = JSON.parse(JSON.stringify(this.area));
     const {x, y, block: tetromino} = this.activeTetromino;
 
-    for(let i = 0; i < tetromino.length; i++) {
+    for (let i = 0; i < tetromino.length; i++) {
       const row = tetromino[i];
       for (let j = 0; j < row.length; j++) {
         if (row[j] !== 'o') {
@@ -106,7 +120,7 @@ export class Game {
 
   checkOutPosition(x, y) {
     const tetromino = this.activeTetromino.block;
-    for(let i = 0; i < tetromino.length; i++) {
+    for (let i = 0; i < tetromino.length; i++) {
       for (let j = 0; j < tetromino[i].length; j++) {
         if (tetromino[i][j] === 'o') continue;
 
@@ -115,7 +129,6 @@ export class Game {
           this.area[y + i][x + j] !== 'o') {
           return false;
         }
-        
       }
     }
     return true
@@ -124,7 +137,7 @@ export class Game {
   stopMove() {
     const {x, y, block: tetromino} = this.activeTetromino;
 
-    for(let i = 0; i < tetromino.length; i++) {
+    for (let i = 0; i < tetromino.length; i++) {
       const row = tetromino[i];
       for (let j = 0; j < row.length; j++) {
         if (row[j] !== 'o') {
@@ -134,7 +147,10 @@ export class Game {
     }
 
     this.changeTetromino();
-    this.clearRow();
+    const lines = this.clearRow();
+    this.calcScore(lines);
+    this.updatePanels();
+    this.gameOver = !this.checkOutPosition(this.activeTetromino.x, this.activeTetromino.y);  
   }
 
   clearRow() {
@@ -148,7 +164,7 @@ export class Game {
           countBlock += 1;
         }
       }
-      
+
       if (!countBlock) break;
 
       if (countBlock === COLUMNS) {
@@ -160,7 +176,29 @@ export class Game {
     rows.forEach(i => {
       this.area.splice(i, 1);
       this.area.unshift(Array(COLUMNS).fill('o'))
-    })
+    });
 
+    return rows.length;
+  }
+
+  calcScore(lines) {
+    this.score += this.points[lines];
+    this.lines += lines;
+    this.lvl = Math.ceil(this.lines / 10);
+
+    if (this.score > this.record) {
+      this.record = this.score;
+      localStorage.setItem('tetris-record', this.score);
+    }
+  }
+
+  createUpdatePanels(showScore, showTetromino) {
+    showScore(this.score, this.lines, this.lvl, this.record);
+    showTetromino(this.nextTetromino.block);
+
+    this.updatePanels = () => {
+      showScore(this.score, this.lines, this.lvl, this.record);
+      showTetromino(this.nextTetromino.block);
+    }
   }
 }

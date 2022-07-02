@@ -9,6 +9,7 @@ export class Controller {
       if (event.code === codeKey) {
         this.view.init();
         this.start();
+        this.game.createUpdatePanels(this.view.createBlockScore(), this.view.createBlockNextTetromino());
       }
     })
   }
@@ -16,10 +17,18 @@ export class Controller {
   start() {
     this.view.showArea(this.game.viewArea);
 
-    setInterval(() => {
-      this.game.moveDown();
-      this.view.showArea(this.game.viewArea);
-    }, 1000);
+    const tick = () => {
+      if (this.game.gameOer) return;
+      const time = (1000 - 100 * this.game.lvl);
+      setTimeout(() => {
+        this.game.moveDown();
+        this.view.showArea(this.game.viewArea);
+        tick();
+        
+      }, time > 100 ? time : 100);
+    };
+
+    tick();
 
     window.addEventListener('keydown', event => {
       const key = event.code;

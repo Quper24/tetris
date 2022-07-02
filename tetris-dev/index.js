@@ -12,7 +12,3 @@ const controller = new Controller(game, view);
 
 controller.init('Enter');
 
-
-fetch('https://jsonplaceholder.typicode.com/todos/1', {
-  method: 'DELETE',
-})
