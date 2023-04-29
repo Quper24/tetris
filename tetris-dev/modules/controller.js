@@ -18,7 +18,7 @@ export class Controller {
     this.view.showArea(this.game.viewArea);
 
     const tick = () => {
-      if (this.game.gameOer) return;
+      if (this.game.gameOver) return;
       const time = (1000 - 100 * this.game.lvl);
       setTimeout(() => {
         this.game.moveDown();
@@ -32,7 +32,8 @@ export class Controller {
 
     window.addEventListener('keydown', event => {
       const key = event.code;
-      
+      if (this.game.gameOver) return;
+
       switch (key) {
         case 'ArrowLeft':
           this.game.moveLeft();
